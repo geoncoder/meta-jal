@@ -1,0 +1,85 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -118,9 +118,6 @@ if test "$enable_py_axl_support" = "yes"
+    # check python_install_dir and pythondir maches
+    python_dir_temp=`eval echo ${pythondir}`
+    # check python_install_dir and pythondir maches
+-   if test "$python_dir_check" != "ok" ; then
+-      AC_MSG_ERROR([ERROR: pythondir variable is poiting to an unusable location: $python_dir_temp. Error detected: $python_dir_check. Fix your autoconf install or disable python building, for that, pass --disable-py-axl to configure. This usually indicates a problem with automake package which provides the _AM_PATH_PYTHON_ macro.])
+-   fi
+    echo "Python install dir OK: $python_dir_temp"
+ fi
+ AM_CONDITIONAL(ENABLE_PY_AXL, test "x$python_devel_found" = "xyes")
+--- /dev/null
++++ b/AUTHORS
+@@ -0,0 +1 @@
++AUTHORS
+--- /dev/null
++++ b/ChangeLog
+@@ -0,0 +1 @@
++ChangeLog
+--- /dev/null
++++ b/NEWS
+@@ -0,0 +1 @@
++NEWS
+--- /dev/null
++++ b/src/axl_config.h
+@@ -0,0 +1,58 @@
++/*
++ * Axl Library axl_config.h
++ * Platform dependant definitions.
++ *
++ * This is a generated file.  Please modify 'configure.ac'
++ */
++
++#ifndef __AXL_CONFIG_H__
++#define __AXL_CONFIG_H__
++
++/**
++ * \addtogroup axl_decl_module
++ * @{
++ */
++
++/**
++ * @brief Allows to convert integer value (including constant values)
++ * into a pointer representation.
++ *
++ * Use the oposite function to restore the value from a pointer to a
++ * integer: \ref PTR_TO_INT.
++ *
++ * @param integer The integer value to cast to pointer.
++ *
++ * @return A \ref axlPointer reference.
++ */
++#define INT_TO_PTR(integer)   ((axlPointer) (long) ((int)integer))
++
++/**
++ * @brief Allows to convert a pointer reference (\ref axlPointer),
++ * which stores an integer that was stored using \ref INT_TO_PTR.
++ *
++ * Use the oposite function to restore the pointer value stored in the
++ * integer value.
++ *
++ * @param ptr The pointer to cast to a integer value.
++ *
++ * @return A int value.
++ */
++#define PTR_TO_INT(ptr) ((int) (long) (ptr))
++
++/**
++ * @brief Allows to get current platform configuration. This is used
++ * by Axl library but could be used by applications built on top of
++ * Axl to change its configuration based on the platform information.
++ */
++#define AXL_OS_UNIX (1)
++
++/**
++ * @internal Allows to now if the platform support vasprintf
++ * function. Do not use this macro as it is supposed to be for
++ * internal use.
++ */
++#define AXL_HAVE_VASPRINTF (1)
++
++/* @} */
++
++#endif

@@ -1,0 +1,11 @@
+--- a/SConstruct
++++ b/SConstruct
+@@ -108,7 +108,7 @@ if platform.system() == 'SunOS':
+ 	debug_env.Replace(RPATHPREFIX = '-Wl,-R')
+ 	debug_env.PrependENVPath('PKG_CONFIG_PATH',
+ 			'/usr/local/ssl/lib/pkgconfig:/usr/local/lib/pkgconfig')
+-	debug_env.MergeFlags({'LINKFLAGS':'-L/usr/local/lib -Wl,-R,/usr/local/lib -Wl,-R,/usr/local/ssl/lib'.split()})
++	debug_env.MergeFlags({'LINKFLAGS':'-L/usr/local/lib -Wl,-R,/usr/local/lib -Wl,-R,/usr/local/ssl/lib -ldl -lm -lpthread -pthread'.split()})
+ 	debug_env.PrependENVPath('PATH', '/usr/sfw/bin')
+ 	debug_env.MergeFlags('-lsocket')
+ 	debug_env["bdb_cflags"] = "-I/usr/local/BerkeleyDB.4.7/include".split()

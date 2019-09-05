@@ -1,0 +1,20 @@
+--- a/SConstruct
++++ b/SConstruct
+@@ -78,7 +78,7 @@ profiling_ldflags = profiling_ccflags
+ stack_protector_ccflags = '-fstack-protector --param=ssp-buffer-size=4'.split()
+ 
+ extra_release_ccflags = '-DNDEBUG -D_FORTIFY_SOURCE=2 -g -O3'.split()
+-debug_env = Environment(ENV=os.environ, tools=['default','doxygen', 'test_dept', 'gcc', 'g++'],
++debug_env = Environment(ENV=os.environ, tools=['default','test_dept', 'gcc', 'g++'],
+ 		parse_flags= default_ccflags,
+ 		toolpath=['./3rd-party/site_scons/site_tools/', './build-scripts/site_tools/'])
+ debug_env['JALOP_VERSION_STR'] = '1.0'
+@@ -287,8 +287,4 @@ if GetOption("clean"):
+ 	debug_env.Default('debug_dir')
+ 	debug_env.Default('release_dir')
+ 
+-# docs only need to get built once, and it shouldn't matter if the debug or
+-# release flags are used.
+-
+-SConscript('doc/SConscript', duplicate=0, exports={'env':debug_env})
+ 
